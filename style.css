@@ -1,0 +1,198 @@
+html{
+  height: 100%;
+  background-image: linear-gradient(cornflowerblue,dodgerblue);
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+  color: #0f222d;
+  background-size: auto;
+}
+
+.main{
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+h1{
+  text-align: center;
+  color: #fff;
+}
+
+form{
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 14px;
+}
+
+input[type="text"]{
+  width: 310px;
+  height: 30px;
+  outline: 0;
+  border: none;
+  font-size: 1.5em;
+  background: #fff;
+  color: #2f4f4f;
+}
+
+input[type="text"].filter-input {
+  border: 1px solid grey;
+  width: 370px;
+  border-radius: 14px;
+  padding: 15px;
+  margin-top: 5px;
+}
+
+.add-button{
+  font-size: 16px;
+  color: grey;
+  background-color: #fff;
+  outline: 0;
+  width: 50px;
+  border: 1px solid grey;
+  border-radius: 14px;
+}
+
+.add-button:hover {
+  cursor:pointer;
+  background: whitesmoke;
+}
+
+.tasks-board{
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 10px 40px;
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 14px;
+}
+
+.no-items {
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 10px 40px;
+  color: red;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 20px;
+}
+
+ul{
+  list-style: none;
+  width: 100%;
+  padding-left: 0;
+}
+
+li{
+  border-bottom: 1px solid #53BDFF;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 1.3em;
+  color: #2f4f4f;
+  position: relative;
+}
+
+.clear-button{
+  text-align: center;
+  font-size: 24px;
+  cursor: pointer;
+  width: 100%;
+  border: transparent;
+  background: red;
+  color: white;
+  padding: 10px 0;
+  border-radius: 20px;
+}
+
+.delete{
+  padding: 0 6px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  border-radius: 50%;
+  color: red;
+  border: 1px solid red;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 500px) {
+  .main{
+    margin: auto;
+    width: 100%;
+  }
+  input[type="text"]{
+    width: 80%;
+  }
+  button{
+    width: 10%;
+  }
+}
