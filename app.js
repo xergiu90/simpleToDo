@@ -1,11 +1,12 @@
 loadEvents();
 let taskList= [];
+let tempInputValue= '';
 
 // load every event in the page
 function loadEvents(){
   document.querySelector('form').addEventListener('submit',submit);
   document.getElementById('clear').addEventListener('click',clearList);
-  document.querySelector('ul').addEventListener('click',deleteOrTick);
+  document.querySelector('ul').addEventListener('click',deleteEditOrTick);
   document.querySelector('.filter-input').addEventListener('input',filterElements);
 }
 // subit data function
@@ -24,7 +25,7 @@ function submit(e){
 function addTask(task){
   let ul = document.querySelector('ul');
   let li = document.createElement('li');
-  li.innerHTML = `<label class="container">${task}<input type="checkbox"><span class="checkmark"></span></label><span class="delete">×</span>`;
+  li.innerHTML = `<label class="container"><div class="task">${task}</div><input type="checkbox"><span class="checkmark"></span></label><span class="edit">EDIT</span><span class="delete">×</span>`;
   ul.appendChild(li);
   document.querySelector('.tasks-board').style.display = 'flex';
   document.querySelector('.no-items').style.display = 'none';
@@ -34,10 +35,8 @@ function addTask(task){
 function filterElements(e){
   document.querySelector('ul').innerHTML = '';
   if(e.target.value !== '') {
-    console.log(taskList)
     taskList.forEach(
       item => {
-        console.log(item);
         if(item.includes(e.target.value))
           addTask(item);
       }
@@ -56,10 +55,12 @@ function clearList(e){
   document.querySelector('.no-items').style.display = 'block';
 }
 
-// deleteTick
-function deleteOrTick(e){
+// deleteEditTick
+function deleteEditOrTick(e){
   if(e.target.className === 'delete')
     deleteTask(e);
+  else if(e.target.className === 'edit')
+    editTask(e);
   else {
     tickTask(e);
   }
@@ -67,20 +68,34 @@ function deleteOrTick(e){
 
 // delete task
 function deleteTask(e){
-  let remove = e.target.parentNode;
-  let parentNode = remove.parentNode;
-  taskList = taskList.filter(element => element !== e.target.previousSibling.textContent);
-  parentNode.removeChild(remove);
-
+  clearList(e);
+  taskList = taskList.filter(element => element !== e.target.previousSibling.previousSibling.textContent);
   if(!taskList.length) {
     document.querySelector('.tasks-board').style.display = 'none';
     document.querySelector('.no-items').style.display = 'block';
   } else {
     taskList.forEach(
-      item => addTask(item)
+      task => addTask(task)
     );
   }
   document.querySelector('.filter-input').value= ''
+}
+
+function editTask(e){
+  let editInput = e.target.previousSibling;
+
+  if( e.target.innerText === 'OK') {
+    e.target.innerText= 'EDIT';
+    const inputVlaue= editInput.firstChild.value;
+    editInput.innerHTML= `<div class="task">${inputVlaue}</div><input type="checkbox"><span class="checkmark"></span>`;
+    taskList.splice(taskList.indexOf(tempInputValue), 1, inputVlaue);
+  } else {
+    e.target.innerText= 'OK';
+    const textElem = editInput.innerText;
+    tempInputValue = textElem;
+    editInput.innerHTML= '<input class="edit-item">';
+    editInput.firstChild.value = textElem;
+  }
 }
 
 // tick a task

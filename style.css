@@ -117,6 +117,14 @@ li{
   border: 1px solid red;
 }
 
+.edit {
+  color: #53BDFF;
+  position: absolute;
+  right: 50px;
+  top: 21px;
+  cursor: pointer;
+}
+
 .container {
   display: block;
   position: relative;
@@ -137,6 +145,15 @@ li{
   cursor: pointer;
   height: 0;
   width: 0;
+}
+
+.container input.edit-item {
+  position: relative;
+  opacity: 1;
+  cursor: text;
+  height: 20px;
+  width: 200px;
+  margin-left: -35px;
 }
 
 /* Create a custom checkbox */
